@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate} from 'react-router-dom';
+import React, {  useState } from 'react'
 import axios from 'axios';
 
 const ForgotPassword = () => {
 
-
-    const navigate = useNavigate();
     const user =localStorage.getItem("userId");
     const [password,setPassword] = useState("");
     const [message,setMessage]= useState("");
@@ -16,7 +13,7 @@ const ForgotPassword = () => {
         } else if (password.length < 6) {
            alert("Password Length Must Be Greater Than 6 Characters.")
         } else {
-            const res = await axios.post(`http://localhost:5000/api/v1/changepassword`, {
+            const res = await axios.post(`https://pizzaapp-backend-ycpz.onrender.com/api/v1/changepassword`, {
                password:password,
                id:user
             });
@@ -31,20 +28,8 @@ const ForgotPassword = () => {
         }
     }
 
-    const userValid = async () => {
-        const res = await axios.post(`https://pizzaapp-backend-ycpz.onrender.com/api/v1/changepassword`);
 
-        
-        if (res.status === 201) {
-            console.log("user valid")
-        } else {
-            navigate("/");
-        }
-    }
 
-    useEffect(() => {
-        userValid();
-    },);
   return (
     <div>
     <section className='login'>
