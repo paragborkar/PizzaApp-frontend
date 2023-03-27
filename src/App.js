@@ -20,9 +20,10 @@ import { useSelector } from 'react-redux';
 import ForgotPassword from './components/ForgotPassword';
 import PasswordReset from './components/PasswordReset';
 import CheckOTP from './components/CheckOTP';
-
+import axios from 'axios';
 
 function App() {
+  const res=axios.get("https://pizzaapp-backend-ycpz.onrender.com");
   const isLoggedIn=useSelector((state)=>state.auth.isLoggedIn);
   console.log(isLoggedIn);
   return (
