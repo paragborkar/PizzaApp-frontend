@@ -1,26 +1,24 @@
 import React, { useEffect, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 const ForgotPassword = () => {
 
-    const {id,token} = useParams();
-    const navigate = useNavigate();
 
+    const navigate = useNavigate();
+    const user =localStorage.getItem("userId");
     const [password,setPassword] = useState("");
     const [message,setMessage]= useState("");
     const submitHandler = async (e) =>{
-        const currentDate = new Date().toJSON().slice(0, 10);
-        console.log(currentDate);
         e.preventDefault();
         if (password === "") {
            alert("Please Enter Password");
         } else if (password.length < 6) {
            alert("Password Length Must Be Greater Than 6 Characters.")
         } else {
-            const res = await axios.post(`https://pizzaapp-backend-ycpz.onrender.com/api/v1/${id}/${token}`, {
+            const res = await axios.post(`http://localhost:5000/api/v1/changepassword`, {
                password:password,
-               time:currentDate
+               id:user
             });
 
 
@@ -34,7 +32,7 @@ const ForgotPassword = () => {
     }
 
     const userValid = async () => {
-        const res = await axios.get(`https://pizzaapp-backend-ycpz.onrender.com/api/v1/forgotpassword/${id}/${token}`);
+        const res = await axios.post(`http://localhost:5000/api/v1/changepassword`);
 
         
         if (res.status === 201) {
@@ -51,10 +49,10 @@ const ForgotPassword = () => {
     <div>
     <section className='login'>
      <form onSubmit={submitHandler} >
-         <h2>Enter New Password</h2>
-         {message && <p style={{color:"green"}} >Password Reset Successfully</p>}
+         <h2>New Password</h2>
+         {message && <p style={{color:"green"}} >Password Reseted</p>}
 
-         <input type="password" name='password' onChange={(e)=>setPassword(e.target.value)} value={password} placeholder='Email'/>
+         <input type="password" name='password' onChange={(e)=>setPassword(e.target.value)} value={password} placeholder='New Password'/>
          <button type="submit">Send</button>
      </form>
  </section> 

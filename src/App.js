@@ -19,6 +19,7 @@ import NotFound from './components/NotFound';
 import { useSelector } from 'react-redux';
 import ForgotPassword from './components/ForgotPassword';
 import PasswordReset from './components/PasswordReset';
+import CheckOTP from './components/CheckOTP';
 
 
 function App() {
@@ -53,7 +54,8 @@ function App() {
           <Route path='/me' element={<Login/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/passwordreset' element={<PasswordReset/>} />
-          <Route path='/forgotpassword/:id/:token' element={<ForgotPassword/>} />
+          <Route path='/checkotp' element={<CheckOTP/>} />
+          <Route path='/changepassword' element={<ForgotPassword/>} />
           <Route path='*' element={<NotFound/>} />
         </>
        }
