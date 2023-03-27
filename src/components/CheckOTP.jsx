@@ -13,7 +13,7 @@ const CheckOTP = () => {
         if (otp === "") {
             alert("Please Enter OTP");
           } else {
-              const res = await axios.post("http://localhost:5000/api/v1/checkotp", {
+              const res = await axios.post("https://pizzaapp-backend-ycpz.onrender.com/api/v1/checkotp", {
                  otpget:otp,
                  id:user
               });

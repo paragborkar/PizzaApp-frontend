@@ -13,7 +13,7 @@ const PasswordReset = () => {
         if (email === "") {
           alert("Please Enter Email");
         } else {
-            const res = await axios.post("http://localhost:5000/api/v1/sendotp", {
+            const res = await axios.post("https://pizzaapp-backend-ycpz.onrender.com/api/v1/sendotp", {
                email:email
             });
             console.log(res);
