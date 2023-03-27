@@ -1,0 +1,57 @@
+@import 'colors';
+
+.paymentsuccess{
+    background-image: url('../assets/BackImage.jpg');
+    width: 100%;
+    height: 100vh;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+
+    >main{
+        
+        height: 100%;
+        background-color: white;
+        max-width: 900px;
+        margin: auto;
+        padding: 2rem;
+
+        >h1{
+            text-transform: uppercase;
+            text-align: center;
+            margin: 3rem;
+            font: 100 3rem;
+        }
+
+        >p{
+            margin-bottom: 3rem;
+        }
+
+        >a{
+             background-color: $dark;
+                color: white;
+                outline: none;
+                border: none;
+                padding: 0.5rem 1rem;
+                border-radius: 5px;
+                margin: 5rem;
+                text-align: center;
+                cursor: pointer;
+                font-size: 1.1rem;
+               
+        }
+    }
+}
+
+@media screen and (min-width:600px){
+    .paymentsuccess{
+        >main{
+           >a{
+            margin-left: 33%;
+           }
+        }
+    }
+}

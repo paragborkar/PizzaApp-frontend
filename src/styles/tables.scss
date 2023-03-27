@@ -1,0 +1,76 @@
+@import 'colors';
+
+.tableClass{
+    height: 100vh;
+    width: 100%;
+    background-image: url("../assets/BackImage.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    >main{
+        max-width: 900px;
+        background-color: white;
+        margin: auto;
+        height: 100%;
+        padding: 2rem;
+        overflow-x: auto;
+
+
+        >table{
+            width: 100%;
+            text-align: center;
+            border-collapse: collapse;
+
+            tr{
+                background-color: whitesmoke;
+
+                &:last-child{
+                    td:first-child{
+                        border-radius: 0 0 0 10px;
+                    }
+                    td:last-child{
+                        border-radius: 0 0 10px 0;
+                    }
+                }
+            }
+
+            td,th{
+                padding: 1rem;
+            }
+
+            th{
+                background-color: $dark;
+                color: white;
+
+                &:first-child{
+                    border-radius: 10px 0 0 0;
+                }
+                &:last-child{
+                    border-radius: 0 10px 0 0;
+                }
+
+                td{
+                    color: $dark;
+                    
+                    >img{
+                        width: 30px;
+                        height: 30px;
+                        border-radius: 100%;
+                    }
+
+                    >a{
+                        color: $dark;
+                    }
+
+                    >button{
+                        border: none;
+                        cursor: pointer;
+                        margin: 0.25rem;
+                        color: $dark;
+                    }
+                }
+
+            }
+        }
+    }
+}
