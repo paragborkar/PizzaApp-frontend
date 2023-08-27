@@ -16,8 +16,7 @@ const Login = () => {
     }else{
       sendAuthRequest(false,inputs).then((data)=>{localStorage.setItem("userId",data.user._id);localStorage.setItem("name",data.user.name);localStorage.setItem("role",data.user.role);}).then(()=>{dispatch(authActions.login());}).then(()=>navigate("/")).catch((err)=>{alert("Invalid Username Or Password")});
     }
-
-  }
+ }
   const handleChange = (e) =>{
     setInputs((prevState)=>({...prevState,
       [e.target.name]: e.target.value
