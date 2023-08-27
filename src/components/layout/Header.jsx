@@ -23,7 +23,7 @@ const Header = () => {
   return (
     <nav>
         <div style={{fontSize:"30px"}}>
-        <GiFullPizza/><p>PizzaApp</p>
+        <GiFullPizza/><p style={{marginTop:"0.8rem"}}>PizzaApp</p>
         </div>
         <div>
            {isLoggedIn &&
@@ -31,7 +31,7 @@ const Header = () => {
              <Link to='/'>Home</Link>
             <Link to='/contact'>Contact</Link>
             <Link to='/about'>About</Link>
-            <Link to='/cart'> <p className='shoppingcart'><span style={{color:"white"}}>{item}</span></p><FiShoppingCart/></Link>
+            <Link to='/cart' ><span style={{color:"white"}} className='shoppingcart'>{item}</span><FiShoppingCart/></Link>
             </>
            }
             <Link to={isLoggedIn?"/me":"/login"}>
