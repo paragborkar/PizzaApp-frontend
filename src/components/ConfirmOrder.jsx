@@ -21,6 +21,17 @@ const ConfirmOrder = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   const submitHandler = async (e) =>{
     e.preventDefault();
     setDisableBtn(true);
@@ -77,6 +88,11 @@ const ConfirmOrder = () => {
 
         theme: {
           color: "#9c003c",
+        },
+        modal: {
+          ondismiss: function () {
+            setDisableBtn(false);
+          },
         },
       };
       const razorpay = new window.Razorpay(options);

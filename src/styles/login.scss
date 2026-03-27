@@ -14,13 +14,16 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        padding: 1.5rem;
+        padding: 2rem;
         width: 40%;
-        height: 80%;
+        height: auto;
+        min-height: 70%;
+        max-height: 90%;
         justify-content: center;
         background-color: white;
         border-radius: 20px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+        overflow-y: auto;
 
         >h2 {
             font-size: 1.5rem;
@@ -35,13 +38,14 @@
             outline: none;
             border: 1px solid;
             margin: 0.5rem;
-            width: 60%;
+            width: 70%;
             border-radius: 5px;
         }
 
         >p {
             color: blue;
             text-transform: uppercase;
+            cursor: pointer;
         }
 
         >button {
@@ -56,13 +60,32 @@
     }
 }
 
-@media screen and (max-width:600px) {
+// Tablet View
+@media screen and (min-width: 601px) and (max-width: 1024px) {
     .login {
-        height: 70vh;
+        >form {
+            width: 60%;
+            padding: 3rem 2rem;
+        }
+    }
+}
+
+// Mobile View
+@media screen and (max-width: 600px) {
+    .login {
+        height: calc(100vh - 5rem);
+        background-image: none;
+        background-color: white;
 
         >form {
             width: 100%;
-            height: 100%;
+            height: auto;
+            padding: 2rem 1rem;
+            box-shadow: none;
+
+            >input, >button {
+                width: 95%;
+            }
         }
     }
 }
