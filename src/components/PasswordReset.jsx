@@ -7,18 +7,25 @@ const PasswordReset = () => {
 
     const [email,setEmail] = useState("");
     const [message,setMessage]= useState("");
+    const [loading,setLoading]= useState(false);
     const navigate = useNavigate();
     const submitHandler = async (e) =>{
         e.preventDefault();
+        setLoading(true);
         if (email === "") {
           alert("Please Enter Email");
         } else {
             const res = await axios.post("https://pizzaapp-backend-ycpz.onrender.com/api/v1/sendotp", {
                email:email
+            }).catch((err)=>{
+              setLoading(false);
+              alert("Something went wrong");
             });
-            console.log(res);
-            localStorage.setItem("userId",res.data.userfind._id);
-            if (res.status === 201) {
+
+            setLoading(false);
+            if (res && res.status === 201) {
+                console.log(res);
+                localStorage.setItem("userId",res.data.userfind._id);
                 setEmail("");
                 setMessage(true);
                 navigate("/checkotp");
@@ -35,7 +42,9 @@ const PasswordReset = () => {
             {message && <p style={{color:"green"}} >OTP Sent Successfully</p>}
 
             <input type="email" name='email' onChange={(e)=>setEmail(e.target.value)} value={email} placeholder='Email'/>
-            <button type="submit">Send OTP</button>
+             <button type="submit" disabled={loading}>
+                 {loading ? <div className="loader"></div> : "Send OTP"}
+             </button>
         </form>
     </section> 
     </div>

@@ -6,8 +6,10 @@ const ForgotPassword = () => {
     const user =localStorage.getItem("userId");
     const [password,setPassword] = useState("");
     const [message,setMessage]= useState("");
+    const [loading,setLoading] = useState(false);
     const submitHandler = async (e) =>{
         e.preventDefault();
+        setLoading(true);
         if (password === "") {
            alert("Please Enter Password");
         } else if (password.length < 6) {
@@ -16,10 +18,13 @@ const ForgotPassword = () => {
             const res = await axios.post(`https://pizzaapp-backend-ycpz.onrender.com/api/v1/changepassword`, {
                password:password,
                id:user
+            }).catch((err)=> {
+              setLoading(false);
+              alert("Something went wrong");
             });
 
-
-            if (res.status === 201) {
+            setLoading(false);
+            if (res && res.status === 201) {
                 setPassword("")
                 setMessage(true)
             } else {
@@ -38,7 +43,9 @@ const ForgotPassword = () => {
          {message && <p style={{color:"green"}} >Password Reseted</p>}
 
          <input type="password" name='password' onChange={(e)=>setPassword(e.target.value)} value={password} placeholder='New Password'/>
-         <button type="submit">Send</button>
+         <button type="submit" disabled={loading}>
+          {loading ? <div className="loader"></div> : "Send"}
+         </button>
      </form>
  </section> 
  </div>

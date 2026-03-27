@@ -112,7 +112,9 @@ const ConfirmOrder = () => {
           <label>Online</label>
           <input type="radio" name='payment' onChange={() => setPaymentMethod("Online")} required />
         </div>
-       <button type='submit' disabled={disableBtn} >Place Order</button>
+       <button type='submit' disabled={disableBtn} >
+         {disableBtn ? <div className="loader"></div> : "Place Order"}
+       </button>
       </form>
     </main>
    </section>

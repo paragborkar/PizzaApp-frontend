@@ -9,6 +9,15 @@ const Profile = () => {
     const dispatch = useDispatch();
     const user =localStorage.getItem("name");
     const role=localStorage.getItem("role");
+    const [loading, setLoading] = React.useState(false);
+
+    const logoutHandler = () => {
+      setLoading(true);
+      setTimeout(() => {
+        dispatch(authActions.logout());
+        setLoading(false);
+      }, 1000);
+    };
   return (
    <section className='profile' >
     <main>
@@ -25,7 +34,9 @@ const Profile = () => {
         <div>
             <Link  to='/myorders' >Orders</Link>
         </div>
-        <button onClick={()=>dispatch(authActions.logout())} >Logout</button>
+        <button onClick={logoutHandler} disabled={loading}>
+          {loading ? <div className="loader"></div> : "Logout"}
+        </button>
     </main>
    </section>
   )

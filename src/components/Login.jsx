@@ -8,13 +8,34 @@ import { Link, useNavigate } from 'react-router-dom';
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const submitHandler = async (e) =>{
     e.preventDefault();
+    setLoading(true);
     if(isSignup){
-      sendAuthRequest(true,inputs).then((data)=>{localStorage.setItem("userId",data.user._id);alert("Signup Successful.Please Login")}).catch((err)=>{alert("User Already Exists.")});
+      sendAuthRequest(true,inputs).then((data)=>{
+        setLoading(false);
+        localStorage.setItem("userId",data.user._id);
+        alert("Signup Successful.Please Login")
+      }).catch((err)=>{
+        setLoading(false);
+        alert("User Already Exists.")
+      });
 
     }else{
-      sendAuthRequest(false,inputs).then((data)=>{localStorage.setItem("userId",data.user._id);localStorage.setItem("name",data.user.name);localStorage.setItem("role",data.user.role);}).then(()=>{dispatch(authActions.login());}).then(()=>navigate("/")).catch((err)=>{alert("Invalid Username Or Password")});
+      sendAuthRequest(false,inputs).then((data)=>{
+        localStorage.setItem("userId",data.user._id);
+        localStorage.setItem("name",data.user.name);
+        localStorage.setItem("role",data.user.role);
+      }).then(()=>{
+        dispatch(authActions.login());
+      }).then(()=> {
+        setLoading(false);
+        navigate("/");
+      }).catch((err)=>{
+        setLoading(false);
+        alert("Invalid Username Or Password")
+      });
     }
  }
   const handleChange = (e) =>{
@@ -42,7 +63,9 @@ const Login = () => {
            {isSignup && <input type="text" name='name' onChange={handleChange} value={inputs.name} placeholder='Name' />} 
             <input type="email" name='email' onChange={handleChange} value={inputs.email} placeholder='Email'/>
             <input type="password" name='password' onChange={handleChange} value={inputs.password} placeholder='Password'/>
-            <button type="submit">{!isSignup?"Login":"Signup"}</button><br/>
+            <button type="submit" disabled={loading}>
+              {loading ? <div className="loader"></div> : (isSignup ? "Signup" : "Login")}
+            </button><br/>
             <Link to='/passwordreset' ><p style={{color:"blue"}} >FORGOT PASSWORD?</p></Link><br/>
             <p onClick={()=>{setisSignup(!isSignup)}} >Change To {isSignup?"Login":"Signup"}</p>
         </form>
