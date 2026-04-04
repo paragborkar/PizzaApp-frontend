@@ -22,16 +22,24 @@ import PasswordReset from './components/PasswordReset';
 import CheckOTP from './components/CheckOTP';
 import axios from 'axios';
 import { useEffect } from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 function App() {
-  useEffect(()=>{
-    const res=axios.get("https://pizzaapp-backend-ycpz.onrender.com");
-  },[]);
+  useEffect(() => {
+    toast("It can take some time to load initially because the server is restarting.", {
+      icon: '⏳',
+      duration: 6000,
+    });
+    axios.get("https://pizzaapp-backend-ycpz.onrender.com/api/v1/ping")
+      .then(() => console.log("Server pinged successfully"))
+      .catch((err) => console.log(err));
+  }, []);
   const isLoggedIn=useSelector((state)=>state.auth.isLoggedIn);
   console.log(isLoggedIn);
   return (
    <Router>
     <Header/>
+    <Toaster />
     <Routes>
    { isLoggedIn &&
         <>
